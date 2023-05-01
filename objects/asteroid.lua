@@ -9,7 +9,7 @@ function Asteroid(x, y, size, level, debugging)
 
     local offset = {}
     for i = 1, vert + 1 do 
-        table.insert(offset, math,random() * ASTEROID_JAGGED * 2 + 1 - ASTEROID_JAGGED)
+        table.insert(offset, math.random() * ASTEROID_JAGGED * 2 + 1 - ASTEROID_JAGGED)
     end
 
     local vel = -1
@@ -43,10 +43,10 @@ function Asteroid(x, y, size, level, debugging)
             for i = 1, self.vert - 1 do
                 table.insert(points,
                 self.x + self.radius * self.offset[i + 1] *
-                math.cos(self.angle + i * math.pi + 2 / self.vert))
+                math.cos(self.angle + i * math.pi * 2 / self.vert))
                 table.insert(points,
                 self.y + self.radius * self.offset[i + 1] *
-                math.sin(self.angle + i * math.pi + 2 / self.vert))
+                math.sin(self.angle + i * math.pi * 2 / self.vert))
             end
 
             love.graphics.polygon("line",points)
@@ -56,6 +56,11 @@ function Asteroid(x, y, size, level, debugging)
 
                 love.graphics.circle("line",self.x,self.y,self.radius)
             end
+        end,
+
+        move = function (self, dt) 
+            self.x = self.x + self.x_vel * dt
+            self.y = self.y + self.y_vel * dt
         end
     }
 end
