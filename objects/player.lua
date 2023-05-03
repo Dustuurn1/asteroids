@@ -1,3 +1,4 @@
+local Laser =  require "objects.laser"
 function Player(debugging)
     local SHIP_SIZE = 30
     local VIEW_ANGLE = math.rad(90)
@@ -11,6 +12,7 @@ function Player(debugging)
         angle = VIEW_ANGLE,
         rotation = 0,
         thrusting = false,
+        lasers = {},
         thrust = {
             x = 0,
             y = 0,
@@ -113,6 +115,11 @@ function Player(debugging)
                 self.x - self.radius * (2/3 * math.cos(self.angle) - 0.5 * math.sin(self.angle)),
                 self.y + self.radius * (2/3 * math.sin(self.angle) + 0.5 * math.cos(self.angle))
             )
+        end,
+
+        shootLaser = function(self)
+            table.insert(self.lasers, Laser(self.x, self.y, self.angle))
+            
         end
     }
 end

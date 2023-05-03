@@ -3,7 +3,7 @@ function Asteroid(x, y, size, level, debugging)
 
     local ASTEROID_VERT = 10
     local ASTEROID_JAGGED = 0.4
-    local ASTEROID_SPEED = math.random(50) + (level * 2)
+    local ASTEROID_SPEED = math.random(50) + (level * 4) + 10
 
     local vert = math.ceil(math.random(ASTEROID_VERT + 1) + ASTEROID_VERT / 2)
 
