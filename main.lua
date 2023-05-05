@@ -1,6 +1,7 @@
 
 local Player = require "objects/player"
 local Game = require "states/game"
+local Menu = require "states/menu"
 require("components/text")
 math.randomseed(os.time())
 ----------------------Locals----------------------
@@ -13,13 +14,22 @@ function love.load()
 
     local show_debugging = true
 
+    menu = Menu()
     player = Player(show_debugging)
     game = Game()
+
+    if game.state.running then
     game:startNewGame(player)
+    else menu:load()
+    end
 end
 
 function love.update(dt)
     mouse_x, mouse_y = love.mouse.getPosition()
+    if game.state.menu then
+        menu:draw()
+    end
+
     if game.state.running then
         player:move()
         
